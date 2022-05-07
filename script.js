@@ -1,26 +1,30 @@
-// $('textarea').val(localStorage.//getItem($('textarea')./////// siblings('p')))
+var H = moment().format('H')
 var timeBlock = $('.timeblock')
 for(let i = 0; i < localStorage.length; i++){
-    //console.log('.'+localStorage.key(i).trim())
-    //$('console.log')
-    //console.log(i)
     $('.'+localStorage.key(i).trim()).siblings('textarea').val(localStorage.getItem(localStorage.key(i)))
-    //if(parseInt(localStorage.key(i)) == parseInt($//(timeBlock).text())){
-        //console.log("'" + localStorage.key(i) + "'")
-        //$('p').text($(localStorage.key))
-        //console.log($(timeBlock).text())
-
-    //}
 }
 
 $('#currentDay').text(moment().format('MMMM Do YYYY'))
 var saveBtn = $('.saveBtn')
-for (let i = 0; i < saveBtn.length; i++) {
-    $('.saveBtn')[i].click( function(){
-    
-    localStorage.setItem($('.saveBtn')[i].siblings('p').text(), $('.saveBtn').siblings('textarea').val())
+
+$('.saveBtn').click(function(e){
+e.preventDefault()
+localStorage.setItem($(this).siblings('p').text(), $(this).siblings('textarea').val())
 })
-}
 
-
-//alert(localStorage.length)
+$(document).ready(function(){
+    for (i = 9; i <= 17; i++) {
+      var timeBlock = parseInt($('#'+i).attr('id'))
+      var currentTime = parseInt(moment().format('H'));
+    
+  if (timeBlock < currentTime) {
+    $('#'+i).siblings('textarea').addClass('past')
+  }
+  else if (timeBlock > currentTime) {
+    $('#'+i).siblings('textarea').addClass('future')
+  }
+  else if (timeBlock = currentTime) {
+    $('#'+i).siblings('textarea').addClass('present')
+  }
+  }
+  });
